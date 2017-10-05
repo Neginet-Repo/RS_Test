@@ -1,0 +1,16 @@
+@import 'src/scss/variables';
+
+.input {
+    border-style: solid;
+    border-color: $border-bright;
+    border-width: 0 0 2px 0;
+    font-size: 16px;
+    padding: 5px 0;
+    outline: 0;
+    transition: $transition-default;
+    width: 100%;
+
+    &:focus {
+        border-color: $border-accent;
+    }
+}

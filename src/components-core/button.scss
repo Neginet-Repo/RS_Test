@@ -1,0 +1,38 @@
+@import 'src/scss/variables';
+
+.button {
+    background-color: transparent;
+    border: 0;
+    padding: 7px 15px;
+    transition: $transition-default;
+
+    &__primary {
+        background-color: $background-accent;
+        border-radius: 1px;
+        color: $text-accent;
+        font-size: 14px;
+        font-weight: bold;
+
+        &:hover {
+            background-color: lighten($background-accent, 10%);
+        }
+
+        &--disabled {
+            background-color: $background-dark;
+            opacity: 0.75;
+
+            &:hover {
+                background-color: $background-dark;
+            }
+        }
+    }
+
+    &__secondary {
+        color: $text-focused;
+        font-weight: bold;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

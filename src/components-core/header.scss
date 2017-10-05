@@ -1,0 +1,14 @@
+@import 'src/scss/variables';
+
+.header {
+    align-items: center;
+    display: flex;
+    height: 64px;
+    margin-bottom: 10px;
+
+    &__title {
+        font-size: 32px;
+        font-weight: bold;
+        padding: 0 25px;
+    }
+}

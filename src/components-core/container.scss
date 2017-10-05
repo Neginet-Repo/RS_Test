@@ -1,0 +1,14 @@
+@import 'src/scss/responsive';
+@import 'src/scss/variables';
+
+.container {
+    margin: 0 auto;
+    min-height: 300px;
+    padding: 25px;
+    width: 100%;
+
+    @include responsive-to(desktop) {
+        border: 10px solid $border-bright;
+        width: 870px;
+    }
+}

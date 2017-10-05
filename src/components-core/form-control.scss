@@ -1,0 +1,16 @@
+@import 'src/scss/variables';
+
+.form-control {
+    margin-bottom: 32px;
+    min-width: 320px;
+
+    &__component {
+        padding: 5px 0;
+    }
+
+    &__label {
+        color: $text-bright;
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
