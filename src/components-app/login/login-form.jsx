@@ -1,6 +1,7 @@
 import Button from 'components-core/button';
 import Form from 'components-core/form';
 import Input from 'components-core/input';
+import loginFormConfig from 'lib-app/login/login-form-config';
 import navigator from 'lib-app/navigator';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -13,21 +14,12 @@ class LoginForm extends React.Component {
         this.navigateToSignUpPage = this.navigateToSignUpPage.bind(this);
     }
 
-    getFormData() {
-        // TODO: replace this to a lib.
-
-        return {
-            username: '',
-            password: ''
-        };
-    }
-
     getProps() {
         return {
             className: 'login-form',
-            disableOnFormEmpty: true,
+            config: loginFormConfig,
             extraButton: this.renderSignUpButton(),
-            formData: this.getFormData()
+            submitButtonText: 'Login'
         };
     }
 
@@ -40,8 +32,8 @@ class LoginForm extends React.Component {
     render() {
         return (
             <Form {...this.getProps()}>
-                <Input name="username" labelText="Username" />
-                <Input name="password" type="password" labelText="Password" />
+                <Input name="username" />
+                <Input name="password" />
             </Form>
         );
     }
@@ -49,7 +41,7 @@ class LoginForm extends React.Component {
     renderSignUpButton() {
         return (
             <Button buttonType="secondary" onClick={this.navigateToSignUpPage}>
-                Sign up
+                Sign Up
             </Button>
         );
     }

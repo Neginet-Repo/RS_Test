@@ -1,7 +1,11 @@
 .form {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
+    &__extra-button-block,
     &__submit-block {
-        display: flex;
-        justify-content: flex-end;
+        flex-shrink: 1;
     }
 }

@@ -1,8 +1,32 @@
 @import 'src/scss/variables';
 
 .form-control {
-    margin-bottom: 32px;
-    min-width: 320px;
+    display: inline-block;
+    margin: 7px 0 32px;
+    width: 100%;
+
+    &--tiny {
+        width: 90px;
+    }
+
+    &--small {
+        width: 135px;
+    }
+
+    &--medium {
+        width: 180px;
+    }
+
+    &--large {
+        width: 360px;
+    }
+
+    &--tiny,
+    &--small,
+    &--medium,
+    &--large {
+        margin-right: 20px;
+    }
 
     &__component {
         padding: 5px 0;
@@ -10,7 +34,8 @@
 
     &__label {
         color: $text-bright;
-        font-size: 12px;
+        font-size: 10px;
         font-weight: bold;
+        text-transform: uppercase;
     }
 }
