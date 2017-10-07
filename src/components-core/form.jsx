@@ -59,18 +59,18 @@ class Form extends React.Component {
         console.log(this.state.form);
     }
 
-    isFormEmpty() {
-        return _.some(this.state.form, (item) => {
-            return item === '';
+    isFormRequiredFieldsEmpty() {
+        return _.some(this.state.form, (item, field) => {
+            let formField = this.props.config.props[field];
+
+            return (formField.required && item === '');
         });
     }
 
     isSubmitButtonDisabled() {
         let disabledStatus = false;
 
-        if (this.props.disableOnFormEmpty) {
-            disabledStatus = this.isFormEmpty();
-        }
+        disabledStatus = this.isFormRequiredFieldsEmpty();
 
         return disabledStatus;
     }
@@ -79,22 +79,22 @@ class Form extends React.Component {
         return (
             <form className={this.getClass()}>
                 {React.Children.map(this.props.children, this.renderChild)}
-                {this.renderExtraButtonBlock()}
-                {this.renderSubmitBlock()}
+                <div className="form__footer">
+                    {this.renderExtraButtonBlock()}
+                    {this.renderSubmitBlock()}
+                </div>
             </form>
         );
     }
 
     renderChild(child, index) {
         let childNode = child;
-        let childProps;
+        let childProps = _.get(childNode, 'props', {});
 
         if (childNode !== null) {
-            childProps = childNode.props;
-
             if (childProps.name) {
                 childNode = this.renderCopyOfComponent(childNode, index);
-            } else {
+            } else if (childNode.type !== 'h2' && childProps.children) {
                 childNode = React.Children.map(childProps.children, this.renderChild);
             }
         }
@@ -137,15 +137,27 @@ class Form extends React.Component {
             </div>
         );
     }
-}
 
-Form.defaultProps = {
-    disableOnFormEmpty: true
-};
+    resetFormFields(fields) {
+        let defaultForm = this.props.config();
+        let newForm = _.cloneDeep(this.state.form);
+
+        if (fields) {
+            _.map(fields, fieldName => {
+                newForm[fieldName] = defaultForm[fieldName];
+            });
+        } else {
+            newForm = defaultForm;
+        }
+
+        this.setState({
+            form: newForm
+        });
+    }
+}
 
 Form.propTypes = {
     config: PropTypes.func.isRequired,
-    disableOnFormEmpty: PropTypes.bool,
     extraButton: PropTypes.node
 };
 

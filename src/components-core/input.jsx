@@ -15,6 +15,8 @@ class Input extends React.Component {
             name: props.name,
             onChange: props.onChange,
             placeholder: props.placeholder,
+            readOnly: props.readOnly,
+            required: props.required,
             type: props.type || 'text',
             value: props.value
         };
@@ -30,6 +32,8 @@ Input.propTypes = {
     name: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    readOnly: PropTypes.bool,
+    required: PropTypes.bool,
     type: PropTypes.string,
     value: PropTypes.string
 };

@@ -7,10 +7,12 @@ const loginFormConfig = () => {
 
 loginFormConfig.props = {
     username: {
-        labelText: 'Username'
+        labelText: 'Username',
+        required: true
     },
     password: {
         labelText: 'Password',
+        required: true,
         type: 'password'
     }
 };

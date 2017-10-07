@@ -2,7 +2,7 @@
 
 .form-control {
     display: inline-block;
-    margin: 7px 0 32px;
+    margin: 7px 20px 32px 0;
     width: 100%;
 
     &--tiny {
@@ -19,13 +19,6 @@
 
     &--large {
         width: 360px;
-    }
-
-    &--tiny,
-    &--small,
-    &--medium,
-    &--large {
-        margin-right: 20px;
     }
 
     &__component {

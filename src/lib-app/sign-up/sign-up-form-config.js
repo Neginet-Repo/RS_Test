@@ -1,7 +1,7 @@
 const signUpFormConfig = () => {
     return {
         address: '',
-        approved: '',
+        approved: 'yes',
         closingDays: '',
         companyAddress: '',
         companyName: '',
@@ -15,85 +15,190 @@ const signUpFormConfig = () => {
         licenseNumber: '',
         listings: '',
         maximumPurchasePrice: '',
-        methodOfPurchase: '',
+        methodOfPurchase: 'cash',
         password: '',
         phoneNumber: '',
-        username: ''
+        username: '',
+        vendorPhoneNumber: '',
+        vendorType: 'financing'
     };
 };
 
 signUpFormConfig.props = {
     address: {
         inputSize: 'large',
-        labelText: 'Address'
+        labelText: 'Address',
+        required: true
+    },
+    addressOfProperty: {
+        inputSize: 'large',
+        labelText: 'Address of Property',
+        required: true
     },
     approved: {
         inputSize: 'tiny',
-        labelText: 'Approved'
+        items: [
+            {
+                content: 'Yes',
+                value: 'yes'
+            },
+            {
+                content: 'No',
+                value: 'no'
+            }
+        ],
+        labelText: 'Approved',
+        required: true
     },
     closingDays: {
-        inputSize: 'small',
-        labelText: 'Number of Closing Days'
+        inputSize: 'tiny',
+        labelText: 'Closing Days',
+        required: true
     },
     companyAddress: {
-        labelText: 'Company Address'
+        inputSize: 'large',
+        labelText: 'Company Address',
+        required: true
     },
     companyName: {
-        labelText: 'Company Name'
+        inputSize: 'medium',
+        labelText: 'Company Name',
+        required: true
     },
     confirmPassword: {
         inputSize: 'large',
         labelText: 'Confirm Password',
+        required: true,
         type: 'password'
+    },
+    dateOfSelling: {
+        inputSize: 'medium',
+        labelText: 'Date of Selling',
+        required: true
     },
     downPayment: {
         inputSize: 'tiny',
-        labelText: 'Down Payment %'
+        labelText: 'Down Payment %',
+        required: true
     },
     earnestMoneyDeposit: {
         inputSize: 'medium',
-        labelText: 'Earnest Money Deposit %'
+        labelText: 'Earnest Money Deposit %',
+        required: true
     },
     emailAddress: {
         inputSize: 'medium',
-        labelText: 'Email Address'
+        labelText: 'Email Address',
+        required: true
     },
     firstName: {
         inputSize: 'large',
-        labelText: 'First Name'
+        labelText: 'First Name',
+        required: true
     },
     lastName: {
         inputSize: 'large',
-        labelText: 'Last Name'
+        labelText: 'Last Name',
+        required: true
     },
     licenseBrokerNumber: {
-        labelText: 'Broker License Number'
+        inputSize: 'large',
+        labelText: 'Broker License Number',
+        required: true
     },
     licenseNumber: {
-        labelText: 'License Number'
+        inputSize: 'large',
+        labelText: 'License Number',
+        required: true
     },
     listings: {
-        labelText: 'Listing'
+        inputSize: 'small',
+        labelText: 'Number of Listings',
+        required: true
+    },
+    listPrice: {
+        inputSize: 'medium',
+        labelText: 'List Price',
+        required: true
     },
     maximumPurchasePrice: {
         inputSize: 'tiny',
-        labelText: 'Maximum Price'
+        labelText: 'Maximum Price',
+        required: true
     },
     methodOfPurchase: {
         inputSize: 'small',
-        labelText: 'Method of Purchase'
+        items: [
+            {
+                content: 'Cash',
+                value: 'cash'
+            },
+            {
+                content: 'FHA',
+                value: 'fha'
+            },
+            {
+                content: 'VA',
+                value: 'va'
+            },
+            {
+                content: 'Conventional',
+                value: 'conventional'
+            },
+            {
+                content: 'Hard Money',
+                value: 'hard-money'
+            },
+            {
+                content: 'Other',
+                value: 'other'
+            }
+        ],
+        labelText: 'Method of Purchase',
+        required: true
     },
     password: {
         inputSize: 'large',
         labelText: 'Password',
+        required: true,
         type: 'password'
     },
     phoneNumber: {
         inputSize: 'medium',
-        labelText: 'Phone Number'
+        labelText: 'Phone Number',
+        required: true
     },
     username: {
-        labelText: 'Username'
+        labelText: 'Username',
+        required: true
+    },
+    vendorPhoneNumber: {
+        inputSize: 'large',
+        labelText: 'Vendor Phone Number',
+        required: true
+    },
+    vendorType: {
+        inputSize: 'medium',
+        items: [
+            {
+                content: 'Financing',
+                value: 'financing'
+            },
+            {
+                content: 'Escrow',
+                value: 'escrow'
+            },
+            {
+                content: 'Title',
+                value: 'title'
+            },
+            {
+                content: 'Attorney',
+                value: 'attorney'
+            }
+        ],
+        labelText: 'Type of Vendor',
+        required: true
     }
 };
 

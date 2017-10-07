@@ -4,8 +4,13 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
+    &__footer {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
     &__extra-button-block,
     &__submit-block {
-        flex-shrink: 1;
     }
 }

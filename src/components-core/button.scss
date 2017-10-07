@@ -13,14 +13,16 @@
         font-size: 14px;
         font-weight: bold;
 
+        &:focus,
         &:hover {
-            background-color: lighten($background-accent, 10%);
+            background-color: lighten($background-accent, 20%);
         }
 
         &--disabled {
             background-color: $background-dark;
             opacity: 0.75;
 
+            &:focus,
             &:hover {
                 background-color: $background-dark;
             }
@@ -32,6 +34,7 @@
         font-weight: bold;
         padding: 7px 0;
 
+        &:focus,
         &:hover {
             text-decoration: underline;
         }

@@ -1,0 +1,31 @@
+@import 'src/scss/variables';
+
+.sign-up-form {
+
+    .form-header {
+        color: $text-bright;
+        font-size: 12px;
+        margin: 15px 0 30px;
+        text-align: right;
+
+        &__type {
+            display: inline-block;
+            margin-left: 5px;
+            width: 120px;
+        }
+    }
+
+    &__disclaimer {
+        color: $text-bright;
+        font: 12px/18px 'Roboto';
+        margin-bottom: 15px;
+    }
+
+    &__subtitle {
+        color: $text-bright;
+        font-size: 18px;
+        margin: 0 20px 20px 10px;
+        padding: 14px 0;
+        width: 100%;
+    }
+}
