@@ -4,6 +4,7 @@ import LoginPage from 'components-app/login/login-page';
 import navigator from 'lib-app/navigator';
 import React from 'react';
 import SignUpPage from 'components-app/sign-up/sign-up-page';
+import SummaryPage from 'components-app/summary/summary-page';
 
 class AppRoutes extends React.Component {
 
@@ -14,6 +15,7 @@ class AppRoutes extends React.Component {
                     <Route exact path="/" component={LoginPage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/sign-up" component={SignUpPage} />
+                    <Route path="/summary" component={SummaryPage} />
                 </App>
             </Router>
         );
