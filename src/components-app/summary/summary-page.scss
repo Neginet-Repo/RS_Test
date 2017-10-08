@@ -1,0 +1,51 @@
+@import 'src/scss/variables';
+
+.summary-page {
+
+    .summary-content {
+
+        &__information {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        &__title {
+            font: 28px/34px 'Roboto';
+            margin-bottom: 25px;
+            width: 100%;
+        }
+    }
+
+    .summary-list {
+        margin-bottom: 30px;
+        width: 300px;
+
+        &__title {
+            color: $text-bright;
+            font: 20px/30px 'Roboto';
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    }
+
+    .information {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        &-item__key {
+            color: $text-bright;
+            font: 12px/14px 'Roboto';
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        &__item {
+            font: 16px/20px 'Roboto';
+            margin-bottom: 5px;
+        }
+    }
+}

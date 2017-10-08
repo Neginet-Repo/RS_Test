@@ -1,3 +1,5 @@
+@import 'src/scss/variables';
+
 .form {
     align-items: center;
     display: flex;
@@ -5,18 +7,19 @@
     justify-content: space-between;
 
     &__error {
-        color: red;
+        color: $text-error;
+        flex-basis: 100%;
         font-size: 12px;
-        width: 100%;
+        text-align: center;
+    }
+
+    &__content {
+
     }
 
     &__footer {
         display: flex;
         width: 100%;
         justify-content: space-between;
-    }
-
-    &__extra-button-block,
-    &__submit-block {
     }
 }

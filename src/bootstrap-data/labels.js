@@ -1,0 +1,23 @@
+export default {
+    address: 'Address',
+    addressOfProperty: 'Address of Property',
+    approved: 'Approved',
+    closingDays: 'Closing Days',
+    companyAddress: 'Company Address',
+    companyName: 'Company Name',
+    dateOfSelling: 'Date of Selling',
+    downPayment: 'Down Payment %',
+    earnestMoneyDeposit: 'Earnest Deposit %',
+    emailAddress: 'Email',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    licenseBrokerNumber: 'Broker BRE License Number',
+    licenseNumber: 'BRE License Number',
+    listPrice: 'List Price',
+    listings: 'Number of Listings',
+    maximumPurchasePrice: 'Maximum Purchase Price',
+    methodOfPurchase: 'Method of Purchase',
+    phoneNumber: 'Phone Number',
+    vendorPhoneNumber: 'Vendor Phone Number',
+    vendorType: 'Type of Vendor'
+};

@@ -31,7 +31,7 @@ app.post('/user/login', (req, res) => {
             if (userFound) {
                 res.json({data: userFound, success: true});
             } else {
-                res.json({error: 'Username does not exists', success: false});
+                res.json({error: 'Username or password incorrect.', success: false});
             }
         })
         .catch(error => {
@@ -45,14 +45,13 @@ app.get('/user/data', (req, res) => {
 
     ref.once('value')
         .then(snapshot => {
-            console.log(_.find(snapshot.val(), query));
             return _.find(snapshot.val(), query);
         })
         .then(userFound => {
             if (userFound) {
                 res.json({data: userFound, success: true});
             } else {
-                res.json({error: 'Username does not exists', success: false});
+                res.json({error: 'Username does not exists.', success: false});
             }
         })
         .catch(error => {
