@@ -45,6 +45,12 @@ Firebase database and handles three different endpoints; one is for the
 login, the second one is for signing up and the last one is just a "GET"
 to retrieve user data.
 
+For this test we assigned all the fields to the user even though they
+are not selected as that type, it was done this way to facilitate data
+management with the little time we had to work on the project. A real
+way to manage the data is possible with the current architecture and a
+little more time to work.
+
 The build is done by Webpack, it handles all types of file and also
 creates a different JavaScript bundle for vendor libraries such as
 React, Lodash, classNames. This is configurable. It uses the hash to
