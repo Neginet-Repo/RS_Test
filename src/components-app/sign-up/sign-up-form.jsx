@@ -2,9 +2,11 @@ import 'components-app/sign-up/sign-up-form.scss';
 
 import Form from 'components-core/form';
 import Input from 'components-core/input';
+import navigator from 'lib-app/navigator';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Select from 'components-core/select';
+import serviceCaller from 'lib-app/service/service-caller';
 import signUpFormConfig from 'lib-app/sign-up/sign-up-form-config';
 
 class SignUpForm extends React.Component {
@@ -13,77 +15,83 @@ class SignUpForm extends React.Component {
         super();
 
         this.form = null;
+        this.handleAddAnotherApplication = this.handleAddAnotherApplication.bind(this);
         this.handleApplicationTypeChange = this.handleApplicationTypeChange.bind(this);
+        this.handleValidFormSubmitted = this.handleValidFormSubmitted.bind(this);
 
         this.state = {
-            applicationType: 'user'
+            applicationType: 'user',
+            userFormCompleted: false
         };
     }
 
-    getFormFieldsFor(formType) {
-        let formFields = {
-            agent: [
-                'listings',
-                'companyName',
-                'companyAddress',
-                'licenseNumber',
-                'licenseBrokerNumber'
-            ],
-            buyer: [
-                'downPayment',
-                'methodOfPurchase',
-                'maximumPurchasePrice',
-                'earnestMoneyDeposit',
-                'closingDays',
-                'approved'
-            ],
-            seller: [
-                'addressOfProperty',
-                'listPrice',
-                'dateOfSelling'
-            ],
-            vendor: [
-                'vendorType',
-                'companyName',
-                'companyAddress',
-                'vendorPhoneNumber',
-                'licenseNumber'
-            ],
-            user: []
-        };
+    componentDidMount() {
+        let formData = _.get(this.props, 'formData', {});
 
-        return formFields[formType];
+        if (!_.isEmpty(formData) && formData.username) {
+            this.setState({
+                applicationType: this.getNextApplicationType(formData),
+                userFormCompleted: true
+            });
+        }
+    }
+
+    getNextApplicationType(form) {
+        let types = form.types;
+        let availableTypes = [
+            'agent',
+            'buyer',
+            'seller',
+            'vendor',
+            'user'
+        ];
+
+        return _.head(_.difference(availableTypes, types));
     }
 
     getProps() {
         return {
             config: signUpFormConfig,
+            extraButtonLabel: 'Add another application',
+            extraButtonProps: {
+                disabledOnEmpty: true,
+                onClick: this.handleAddAnotherApplication
+            },
+            formData: this.props.formData,
+            onValidFormSubmitted: this.handleValidFormSubmitted,
             ref: (form) => this.form = form,
             submitButtonText: 'Sign Up'
         };
     }
 
     getSelectProps() {
+        let types = _.get(this.props, 'formData.types', []);
+
         return {
             items: [
                 {
                     content: 'Agent',
+                    disabled: types.includes('agent'),
                     value: 'agent'
                 },
                 {
                     content: 'Buyer',
+                    disabled: types.includes('buyer'),
                     value: 'buyer'
                 },
                 {
                     content: 'Seller',
+                    disabled: types.includes('seller'),
                     value: 'seller'
                 },
                 {
                     content: 'Vendor',
+                    disabled: types.includes('vendor'),
                     value: 'vendor'
                 },
                 {
                     content: 'User',
+                    disabled: (this.state.userFormCompleted),
                     value: 'user'
                 },
             ],
@@ -92,11 +100,47 @@ class SignUpForm extends React.Component {
         };
     }
 
-    handleApplicationTypeChange(event) {
-        this.form.resetFormFields(this.getFormFieldsFor(event.target.value));
+    handleAddAnotherApplication(form) {
+        let types = _.get(this.props, 'formData.types', []);
 
+        if (types.length === 4) {
+            this.handleValidFormSubmitted(form);
+        } else {
+            console.log('should navigate');
+            types.push(this.state.applicationType);
+            navigator.replace({
+                pathname: 'sign-up',
+                state: _.extend(form, {types: types})
+            });
+        }
+    }
+
+    handleApplicationTypeChange(event) {
         this.setState({
             applicationType: event.target.value
+        });
+    }
+
+    handleDone(response) {
+        let data = response.data;
+
+        if (response.success) {
+            navigator.replace({
+                pathname: 'summary',
+                search: '?username=' + data.username
+            });
+        }
+    }
+
+    handleValidFormSubmitted(form) {
+        let types = _.get(this.props, 'formData.types', []);
+
+        types.push(this.state.applicationType);
+
+        serviceCaller({
+            data: _.extend(form, {types: types}),
+            onDone: this.handleDone,
+            serviceName: 'SignUpService'
         });
     }
 
@@ -110,20 +154,13 @@ class SignUpForm extends React.Component {
                     </div>
                 </div>
                 <p className="sign-up-form__disclaimer">
-                    Complete the form to sign up to our system with an specific application. If you want to sign up with other type of application, after completing this form, select the option "Add another application".
+                    Complete the form to sign up to our system with an specific application. If you want to sign up with other type of application, you can press "Add another application" button below.
                 </p>
                 <p className="sign-up-form__disclaimer">
                     Keep in mind that changing the way you apply is going to reset the current form information.
                 </p>
                 <Form {...this.getProps()}>
-                    <Input name="username" />
-                    <Input name="password" type="password" />
-                    <Input name="confirmPassword" type="password" />
-                    <Input name="firstName" />
-                    <Input name="lastName" />
-                    <Input name="emailAddress" />
-                    <Input name="phoneNumber" />
-                    <Input name="address" />
+                    {this.renderUserForm()}
                     {this.renderAgentForm()}
                     {this.renderBuyerForm()}
                     {this.renderSellerForm()}
@@ -207,6 +244,40 @@ class SignUpForm extends React.Component {
 
         return vendorFormNode;
     }
+
+    renderUserForm() {
+        let userFormNode = null;
+
+        if (this.state.userFormCompleted) {
+            userFormNode = (
+                <div className="sign-up-form__user">
+                    <Input name="username" readOnly />
+                </div>
+            );
+        } else {
+            userFormNode = (
+                <div className="sign-up-form__user">
+                    <Input name="username" />
+                    <Input name="password" />
+                    <Input name="firstName" />
+                    <Input name="lastName" />
+                    <Input name="emailAddress" />
+                    <Input name="phoneNumber" />
+                    <Input name="address" />
+                </div>
+            );
+        }
+
+        return userFormNode;
+    }
 }
+
+SignUpForm.defaultProps = {
+    formData: {}
+};
+
+SignUpForm.propTypes = {
+    formData: PropTypes.object
+};
 
 export default SignUpForm;

@@ -15,6 +15,7 @@ class Select extends React.Component {
 
     getOptionProps(option) {
         return {
+            disabled: option.disabled,
             key: option.key || option.value,
             value: option.value
         };
@@ -55,6 +56,7 @@ Select.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
             content: PropTypes.string,
+            disabled: PropTypes.bool,
             value: PropTypes.string.isRequired
         })
     ),

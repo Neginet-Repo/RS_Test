@@ -1,5 +1,7 @@
 import createHistory from 'history/createBrowserHistory';
 
-const history = createHistory();
+const history = createHistory({
+    forceRefresh: true
+});
 
 export default history;

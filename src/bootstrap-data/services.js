@@ -1,17 +1,17 @@
 module.exports = [
     {
-        name: 'JsonTest',
-        url: 'https://jsonplaceholder.typicode.com/posts/1',
-        method: 'GET'
+        method: 'GET',
+        name: 'UserDataService',
+        url: 'user/data'
     },
     {
         method: 'POST',
         name: 'LoginService',
-        url: '//'
+        url: 'user/login'
     },
     {
         method: 'POST',
         name: 'SignUpService',
-        url: '//'
+        url: 'user/sign-up'
     }
 ];

@@ -8,7 +8,7 @@ class SignUpPage extends React.Component {
     render() {
         return (
             <Container className="sign-up-page">
-                <SignUpForm />
+                <SignUpForm formData={this.props.location.state} />
             </Container>
         );
     }

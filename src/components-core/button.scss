@@ -31,12 +31,22 @@
 
     &__secondary {
         color: $text-focused;
+        font-size: 12px;
         font-weight: bold;
         padding: 7px 0;
 
         &:focus,
         &:hover {
             text-decoration: underline;
+        }
+
+        &--disabled {
+            color: $text-bright;
+            opacity: 0.75;
+
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
 }

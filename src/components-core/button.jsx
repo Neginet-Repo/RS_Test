@@ -20,7 +20,8 @@ class Button extends React.Component {
         return classNames('button', {
             'button__primary': (buttonType === 'primary'),
             'button__primary--disabled': (buttonType === 'primary' && disabled),
-            'button__secondary': (buttonType === 'secondary')
+            'button__secondary': (buttonType === 'secondary'),
+            'button__secondary--disabled': (buttonType === 'secondary' && disabled)
         });
     }
 
@@ -30,7 +31,8 @@ class Button extends React.Component {
         return {
             className: this.getClass(),
             disabled: props.disabled,
-            onClick: this.handleClick
+            onClick: this.handleClick,
+            type: props.type || 'button'
         };
     }
 

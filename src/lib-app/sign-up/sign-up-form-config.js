@@ -1,11 +1,11 @@
 const signUpFormConfig = () => {
     return {
         address: '',
+        addressOfProperty: '',
         approved: 'yes',
         closingDays: '',
         companyAddress: '',
         companyName: '',
-        confirmPassword: '',
         downPayment: '',
         earnestMoneyDeposit: '',
         emailAddress: '',
@@ -32,8 +32,7 @@ signUpFormConfig.props = {
     },
     addressOfProperty: {
         inputSize: 'large',
-        labelText: 'Address of Property',
-        required: true
+        labelText: 'Address of Property'
     },
     approved: {
         inputSize: 'tiny',
@@ -47,49 +46,37 @@ signUpFormConfig.props = {
                 value: 'no'
             }
         ],
-        labelText: 'Approved',
-        required: true
+        labelText: 'Approved'
     },
     closingDays: {
         inputSize: 'tiny',
-        labelText: 'Closing Days',
-        required: true
+        labelText: 'Closing Days'
     },
     companyAddress: {
         inputSize: 'large',
-        labelText: 'Company Address',
-        required: true
+        labelText: 'Company Address'
     },
     companyName: {
         inputSize: 'medium',
-        labelText: 'Company Name',
-        required: true
-    },
-    confirmPassword: {
-        inputSize: 'large',
-        labelText: 'Confirm Password',
-        required: true,
-        type: 'password'
+        labelText: 'Company Name'
     },
     dateOfSelling: {
         inputSize: 'medium',
-        labelText: 'Date of Selling',
-        required: true
+        labelText: 'Date of Selling'
     },
     downPayment: {
         inputSize: 'tiny',
-        labelText: 'Down Payment %',
-        required: true
+        labelText: 'Down Payment %'
     },
     earnestMoneyDeposit: {
         inputSize: 'medium',
-        labelText: 'Earnest Money Deposit %',
-        required: true
+        labelText: 'Earnest Money Deposit %'
     },
     emailAddress: {
         inputSize: 'medium',
         labelText: 'Email Address',
-        required: true
+        required: true,
+        type: 'email'
     },
     firstName: {
         inputSize: 'large',
@@ -103,28 +90,23 @@ signUpFormConfig.props = {
     },
     licenseBrokerNumber: {
         inputSize: 'large',
-        labelText: 'Broker License Number',
-        required: true
+        labelText: 'Broker License Number'
     },
     licenseNumber: {
         inputSize: 'large',
-        labelText: 'License Number',
-        required: true
+        labelText: 'License Number'
     },
     listings: {
         inputSize: 'small',
-        labelText: 'Number of Listings',
-        required: true
+        labelText: 'Number of Listings'
     },
     listPrice: {
         inputSize: 'medium',
-        labelText: 'List Price',
-        required: true
+        labelText: 'List Price'
     },
     maximumPurchasePrice: {
         inputSize: 'tiny',
-        labelText: 'Maximum Price',
-        required: true
+        labelText: 'Maximum Price'
     },
     methodOfPurchase: {
         inputSize: 'small',
@@ -154,8 +136,7 @@ signUpFormConfig.props = {
                 value: 'other'
             }
         ],
-        labelText: 'Method of Purchase',
-        required: true
+        labelText: 'Method of Purchase'
     },
     password: {
         inputSize: 'large',
@@ -168,14 +149,15 @@ signUpFormConfig.props = {
         labelText: 'Phone Number',
         required: true
     },
+    types: {},
     username: {
+        inputSize: 'large',
         labelText: 'Username',
         required: true
     },
     vendorPhoneNumber: {
         inputSize: 'large',
-        labelText: 'Vendor Phone Number',
-        required: true
+        labelText: 'Vendor Phone Number'
     },
     vendorType: {
         inputSize: 'medium',
@@ -197,8 +179,7 @@ signUpFormConfig.props = {
                 value: 'attorney'
             }
         ],
-        labelText: 'Type of Vendor',
-        required: true
+        labelText: 'Type of Vendor'
     }
 };
 

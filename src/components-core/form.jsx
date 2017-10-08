@@ -12,12 +12,13 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
 
+        this.handleExtraButtonClick = this.handleExtraButtonClick.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.renderChild = this.renderChild.bind(this);
 
         this.state = {
-            form: props.config()
+            form: _.extend(props.config(), props.formData)
         };
     }
 
@@ -33,6 +34,15 @@ class Form extends React.Component {
         return this.props.config.props[name];
     }
 
+    getExtraButtonProps() {
+        let extraButtonProps = this.props.extraButtonProps;
+
+        return _.extend({}, extraButtonProps, {
+            disabled: (extraButtonProps.disabledOnEmpty) ? this.isSubmitButtonDisabled() : extraButtonProps.disabled,
+            onClick: this.handleExtraButtonClick
+        });
+    }
+
     getSubmitButtonProps() {
         return {
             buttonType: 'primary',
@@ -43,6 +53,14 @@ class Form extends React.Component {
 
     getSubmitButtonText() {
         return this.props.submitButtonText || 'Submit';
+    }
+
+    handleExtraButtonClick(event) {
+        let extraButton = this.props.extraButtonProps;
+
+        if (extraButton.onClick) {
+            extraButton.onClick(this.state.form);
+        }
     }
 
     handleInputChange(event, inputName) {
@@ -56,7 +74,13 @@ class Form extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state.form);
+        let props = this.props;
+
+        event.preventDefault();
+
+        if (props.onValidFormSubmitted) {
+            props.onValidFormSubmitted(this.state.form);
+        }
     }
 
     isFormRequiredFieldsEmpty() {
@@ -77,13 +101,16 @@ class Form extends React.Component {
 
     render() {
         return (
-            <form className={this.getClass()}>
-                {React.Children.map(this.props.children, this.renderChild)}
-                <div className="form__footer">
-                    {this.renderExtraButtonBlock()}
-                    {this.renderSubmitBlock()}
-                </div>
-            </form>
+            <div className={this.getClass()}>
+                <p className="form__error">{this.props.error}</p>
+                <form className="form__content" onSubmit={this.handleSubmit}>
+                    {React.Children.map(this.props.children, this.renderChild)}
+                    <div className="form__footer">
+                        {this.renderExtraButtonBlock()}
+                        {this.renderSubmitBlock()}
+                    </div>
+                </form>
+            </div>
         );
     }
 
@@ -123,9 +150,11 @@ class Form extends React.Component {
     }
 
     renderExtraButtonBlock() {
+        let props = this.props;
+
         return (
             <div className="form__extra-button-block">
-                {this.props.extraButton}
+                <Button {...this.getExtraButtonProps()}>{props.extraButtonLabel}</Button>
             </div>
         );
     }
@@ -139,7 +168,7 @@ class Form extends React.Component {
     }
 
     resetFormFields(fields) {
-        let defaultForm = this.props.config();
+        let defaultForm = _.extend(this.props.config(), this.props.formData);
         let newForm = _.cloneDeep(this.state.form);
 
         if (fields) {
@@ -158,7 +187,12 @@ class Form extends React.Component {
 
 Form.propTypes = {
     config: PropTypes.func.isRequired,
-    extraButton: PropTypes.node
+    error: PropTypes.string,
+    extraButtonLabel: PropTypes.string,
+    extraButtonProps: PropTypes.object,
+    formData: PropTypes.object,
+    onValidFormSubmitted: PropTypes.func.isRequired,
+    submitButtonText: PropTypes.string
 };
 
 export default Form;
