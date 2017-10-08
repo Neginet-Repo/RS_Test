@@ -10,7 +10,7 @@ class LoginPage extends React.Component {
         return (
             <Container className="login-page">
                 <p className="login-page__disclaimer">
-                    Welcome to RS Test. Please, do not use private password, this is just a test and does not have any kind of encryptation or data saving.
+                    Welcome to RS Test. Please, do not use private password, this is just a test and does not have any kind of encryption or data saving.
                 </p>
                 <div className="login-page__container">
                     <LoginForm />

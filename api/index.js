@@ -6,8 +6,8 @@ const firebase = require('firebase');
 const url = require('url');
 
 firebase.initializeApp({
-  apiKey: "AIzaSyAajsPYHkgvYtGN7yNKqYhtavK9rYYM5LY",
-  databaseURL: "https://rs-test-f5f36.firebaseio.com"
+  apiKey: 'AIzaSyBAV5F2ReEjm1Xus_3mln4YISWZY1elRz4',
+  databaseURL: 'https://offer1-test.firebaseio.com/'
 });
 
 const app = express();

@@ -101,13 +101,18 @@ class SignUpForm extends React.Component {
     }
 
     handleAddAnotherApplication(form) {
+        let applicationType = this.state.applicationType;
         let types = _.get(this.props, 'formData.types', []);
 
         if (types.length === 4) {
             this.handleValidFormSubmitted(form);
         } else {
-            console.log('should navigate');
-            types.push(this.state.applicationType);
+            types.push(applicationType);
+
+            if (applicationType !== 'user' && types.length === 1) {
+                types.push('user');
+            }
+
             navigator.replace({
                 pathname: 'sign-up',
                 state: _.extend(form, {types: types})
@@ -133,9 +138,14 @@ class SignUpForm extends React.Component {
     }
 
     handleValidFormSubmitted(form) {
+        let applicationType = this.state.applicationType;
         let types = _.get(this.props, 'formData.types', []);
 
-        types.push(this.state.applicationType);
+        types.push(applicationType);
+
+        if (applicationType !== 'user' && types.length === 1) {
+            types.push('user');
+        }
 
         serviceCaller({
             data: _.extend(form, {types: types}),
